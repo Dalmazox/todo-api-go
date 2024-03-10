@@ -1,0 +1,83 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple TODO API",
+        "title": "TODO Api",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/v1/todos": {
+            "post": {
+                "description": "This endpoint creates a new TODO",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Create a new TODO",
+                "parameters": [
+                    {
+                        "description": "Request Body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateTodoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.HttpError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllers.HttpError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "error": {
+                    "type": "string",
+                    "example": "400"
+                }
+            }
+        },
+        "dto.CreateTodoRequest": {
+            "type": "object",
+            "required": [
+                "description",
+                "done"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "Lorem ipsum"
+                },
+                "done": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        }
+    }
+}

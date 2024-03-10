@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  web:
+    container_name: todo-api
+    build: .
+    ports:
+      - "1234:1234"
+    environment:
+      PORT: 1234
+      CONNECTION_STRING: "postgres://docker:d0ck3r@localhost:5432/TODOS?sslmode=disable"
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1234/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 1
+    network_mode: "host"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+        reservations:
+          cpus: "0.01"
+          memory: 20M

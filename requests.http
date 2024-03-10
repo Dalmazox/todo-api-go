@@ -1,0 +1,10 @@
+GET http://localhost:3334/health
+
+###
+POST http://localhost:1234/v1/todos
+Content-Type: application/json
+
+{
+    "description": "test",
+    "done": true
+}
